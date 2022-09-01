@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Page from "./Page"
 import Axios from "axios"
 
 function Register(props) {
   const nav = useNavigate()
+
   async function postRegister(e) {
     e.preventDefault()
     try {
@@ -31,18 +32,15 @@ function Register(props) {
   const handleChange = e => {
     const { name, value } = e.target
     setFormValues({ ...formValues, [name]: value })
-    //console.log(formValues)
   }
 
   const handleSubmit = e => {
-    //e.preventDefault()
     setFormErrors(validate(formValues))
     setIsSubmit(true)
     postRegister(e)
   }
 
   useEffect(() => {
-    //console.log(formErrors)
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues)
     }
@@ -51,31 +49,14 @@ function Register(props) {
   const validate = values => {
     const errors = {}
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
-    if (!values.username) {
-      errors.username = "Username is required"
-    }
-    if (!values.firstName) {
-      errors.firstName = "First Name is required"
-    }
-    if (!values.lastName) {
-      errors.lastName = "Last Name is required"
-    }
-    if (!values.email) {
-      errors.email = "Email is required"
-    } else if (!regex.test(values.email)) {
+
+    if (!regex.test(values.email)) {
       errors.email = "This is not a valid email format"
     }
-    if (!values.number) {
-      errors.number = "Number is required"
-    }
-    if (!values.password) {
-      errors.password = "Password is required"
-    } else if (values.password.length < 4) {
+    if (values.password.length < 4) {
       errors.password = "Password must be more than 4 characters"
     }
-    if (!values.confirmPassword) {
-      errors.confirmPassword = "Confirm password is required"
-    }
+
     console.log(values.password)
     console.log(values.confirmPassword)
     if (values.password !== values.confirmPassword) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import Axios from "axios"
 
 import Page from "./Page"
@@ -7,6 +7,7 @@ import Page from "./Page"
 function Login(props) {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
+  const [error, setError] = useState()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -23,6 +24,7 @@ function Login(props) {
     } catch (e) {
       console.log("Error logging in")
       console.log(e)
+      setError("Incorrect Username or Password")
     }
   }
 
@@ -42,6 +44,12 @@ function Login(props) {
               <small>Password</small>
             </label>
             <input onChange={e => setPassword(e.target.value)} id="password-login" name="password" className="form-control" type="password" placeholder="Enter password" autoComplete="off" />
+            <br />
+
+            <label htmlFor="error-login" className="text-muted mb-1 text-danger">
+              <p className="text-danger">{error} </p>
+            </label>
+
             <br />
             <h6>
               <Link to="/forgot">Forgot password</Link>

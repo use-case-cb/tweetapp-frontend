@@ -13,9 +13,7 @@ function Users() {
   async function loadUsers() {
     try {
       const response = await Axios.get("http://localhost:8080/users")
-      console.log("Here")
       setUsers(response.data)
-      console.log(response)
     } catch (e) {
       console.log("Error")
       console.log(e)

@@ -10,7 +10,7 @@ function Home(props) {
     const time = date.getHours()
     console.log(time)
     if (time < 12) {
-      setMsg("Good morning")
+      setMsg("Good morning,")
     } else if (time >= 12 && time < 18) {
       setMsg("Good afternoon,")
     } else {

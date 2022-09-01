@@ -2,25 +2,21 @@ import React, { useEffect, useState } from "react"
 import Axios from "axios"
 import { useNavigate, Link } from "react-router-dom"
 import Page from "./Page"
-import TweetHeader from "./TweetHeader"
-import Replies from "./Replies"
 
 function EditTweet(props) {
   const [tweet, setTweet] = useState([])
   const [content, setContent] = useState()
-  const [likes, setLikes] = useState()
-  const [replies, setReplies] = useState([])
 
   const navigate = useNavigate()
 
   let uri = window.location.pathname
   let parts = uri.split("/")
   let tweetId = parts[2]
+
   async function loadTweets() {
     try {
       const response = await Axios.get("http://localhost:8080/tweet/" + tweetId)
       setTweet(response.data[0])
-      console.log(response.data)
     } catch (e) {
       console.log("Error")
       console.log(e)
@@ -42,7 +38,6 @@ function EditTweet(props) {
       await Axios.put("http://localhost:8080/" + localStorage.getItem("appUsername") + "/update/" + tweetId, {
         content
       })
-      console.log("Posted edited")
       loadTweets()
       navigate(-1)
     } catch (e) {

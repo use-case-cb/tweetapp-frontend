@@ -25,9 +25,10 @@ function Tweets() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    const date = new Date().toLocaleString()
 
     try {
-      await Axios.post("http://localhost:8080/" + localStorage.getItem("appUsername") + "/add", { content, tags })
+      await Axios.post("http://localhost:8080/" + localStorage.getItem("appUsername") + "/add", { content, tags, date })
       e.target.reset()
       loadTweets()
     } catch (e) {

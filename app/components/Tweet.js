@@ -49,7 +49,6 @@ function Tweet(props) {
       await Axios.post("http://localhost:8080/" + localStorage.getItem("appUsername") + "/reply/" + tweetId, {
         content
       })
-      console.log("Reply posted")
       e.target.reset()
       loadTweets()
       loadReplies()

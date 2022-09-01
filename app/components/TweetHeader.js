@@ -3,24 +3,25 @@ import Axios from "axios"
 import { Link } from "react-router-dom"
 
 function TweetHeader(props) {
-  const [liked, setLiked] = useState()
-  function refresh() {
-    window.location.reload(false)
-  }
+  const [likes, setLikes] = useState()
+  const [likeClicked, setLikeClicked] = useState(false)
 
   useEffect(() => {
-    setLiked(true)
-  }, [])
+    setLikes(props.tweet.likes.length)
 
-  async function handleClick(e) {
-    e.preventDefault()
+    for (let i = 0; i < props.tweet.likes.length; i++) {
+      const n = props.tweet.likes[i].username
+      const m = localStorage.getItem("appUsername")
+      if (n === m) {
+        setLikeClicked(true)
+      }
+    }
+  }, [likeClicked])
+
+  async function updateLikes() {
     try {
       await Axios.put("http://localhost:8080/" + localStorage.getItem("appUsername") + "/like/" + props.tweet.id)
-      console.log("Tweet liked")
-      setLiked(!liked)
-
-      refresh()
-      console.log(liked)
+      setLikes(likes + 1)
     } catch (e) {
       console.log("Error")
       console.log(e)
@@ -29,16 +30,22 @@ function TweetHeader(props) {
 
   return (
     <>
-      <p>@{props.tweet.author}</p>
+      <p>
+        @{props.tweet.author}
+        <small>
+          <div className="float-right text-secondary text-muted">{props.tweet.date}</div>
+        </small>
+      </p>
+
       <p>{props.tweet.content} </p>
       <p className="text-info">
         {" "}
         <small>{props.tweet.tags}</small>
         <div className="float-right">
-          <button className="btn" onClick={handleClick}>
-            <i className={liked ? "fas fa-heart text-danger" : "far fa-heart text-danger"} />
+          <button className="btn" onClick={updateLikes}>
+            <i className={"far fa-heart text-danger"} />
           </button>
-          {props.tweet.likes.length}
+          {likes}
         </div>
       </p>
     </>
