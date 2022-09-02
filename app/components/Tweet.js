@@ -107,7 +107,7 @@ function Tweet(props) {
           <Replies replies={replies} />
 
           <form onSubmit={handleReply}>
-            <textarea onChange={e => setContent(e.target.value)} id="content-tweet" name="content" className="body-content  form-control" type="text" placeholder="Start writing" autoComplete="off" />
+            <textarea onChange={e => setContent(e.target.value)} id="content-tweet" name="content" className="body-content  form-control" type="text" placeholder="Start writing (max 144 characters)" autoComplete="off" maxLength={144} required />
             <br />
             <button type="submit" className="mx-4 float-right btn btn-primary">
               Post

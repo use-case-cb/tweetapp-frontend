@@ -44,7 +44,7 @@ function Tweets() {
           <label htmlFor="content-tweet" className="text-muted mb-1 d-block">
             <small>Tweet</small>
           </label>
-          <textarea onChange={e => setContent(e.target.value)} id="content-tweet" name="content" rows="5" className="body-content form-control" type="text" placeholder="Start writing (max. 144 chars)" autoComplete="off" maxLength={144} />
+          <textarea onChange={e => setContent(e.target.value)} id="content-tweet" name="content" rows="5" className="body-content form-control" type="text" placeholder="Start writing (max. 144 chars)" autoComplete="off" maxLength={144} required />
           <label htmlFor="tag-tweet" className="text-muted mb-1 d-block">
             <small>Tags</small>
           </label>

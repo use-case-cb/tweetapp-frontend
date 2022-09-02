@@ -57,10 +57,9 @@ function Register(props) {
       errors.password = "Password must be more than 4 characters"
     }
 
-    console.log(values.password)
-    console.log(values.confirmPassword)
     if (values.password !== values.confirmPassword) {
       errors.confirmPassword = "Passwords must match"
+      console.log("passwords did not match")
     }
     return errors
   }
