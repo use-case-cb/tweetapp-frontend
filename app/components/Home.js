@@ -8,7 +8,6 @@ function Home(props) {
   useEffect(() => {
     const date = new Date()
     const time = date.getHours()
-    console.log(time)
     if (time < 12) {
       setMsg("Good morning,")
     } else if (time >= 12 && time < 18) {

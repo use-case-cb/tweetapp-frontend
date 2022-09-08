@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Page from "./Page"
 import Axios from "axios"
+import { backend } from "../Constants"
 
 function Users() {
   const [users, setUsers] = useState([])
@@ -12,7 +13,7 @@ function Users() {
 
   async function loadUsers() {
     try {
-      const response = await Axios.get("http://localhost:8080/users")
+      const response = await Axios.get(backend + "users")
       setUsers(response.data)
     } catch (e) {
       console.log("Error")

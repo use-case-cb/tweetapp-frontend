@@ -4,8 +4,9 @@ import { useNavigate, Link } from "react-router-dom"
 import Page from "./Page"
 import TweetHeader from "./TweetHeader"
 import Replies from "./Replies"
+import { backend } from "../Constants"
 
-function Tweet(props) {
+function Tweet() {
   const [tweet, setTweet] = useState([])
   const [content, setContent] = useState()
   const [replies, setReplies] = useState([])
@@ -18,10 +19,8 @@ function Tweet(props) {
 
   async function loadTweets() {
     try {
-      const response = await Axios.get("http://localhost:8080/tweet/" + tweetId)
+      const response = await Axios.get(backend + "tweet/" + tweetId)
       setTweet(response.data)
-      console.log("Below")
-      console.log(response.data)
     } catch (e) {
       console.log("Error")
       console.log(e)
@@ -30,9 +29,8 @@ function Tweet(props) {
 
   async function loadReplies() {
     try {
-      const response = await Axios.get("http://localhost:8080/tweet/" + tweetId + "/replies")
+      const response = await Axios.get(backend + "tweet/" + tweetId + "/replies")
       if (response.data) setReplies(response.data)
-      console.log(response.data)
     } catch (e) {
       console.log("Error getting replies")
     }
@@ -46,7 +44,7 @@ function Tweet(props) {
   async function handleReply(e) {
     e.preventDefault()
     try {
-      await Axios.post("http://localhost:8080/" + localStorage.getItem("appUsername") + "/reply/" + tweetId, {
+      await Axios.post(backend + localStorage.getItem("appUsername") + "/reply/" + tweetId, {
         content
       })
       e.target.reset()
@@ -62,7 +60,7 @@ function Tweet(props) {
     const confirm = window.confirm("Are you sure")
     if (confirm) {
       try {
-        const response = await Axios.delete("http://localhost:8080/" + localStorage.getItem("appUsername") + "/delete/" + tweetId)
+        const response = await Axios.delete(backend + localStorage.getItem("appUsername") + "/delete/" + tweetId)
         navigate("/")
       } catch (e) {
         console.log("Error deleting tweet")

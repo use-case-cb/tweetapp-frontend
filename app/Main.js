@@ -19,7 +19,7 @@ function Main() {
     <BrowserRouter>
       <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Routes>
-        <Route path="/" element={loggedIn ? <Home /> : <Login setLoggedIn={setLoggedIn} loggedIn={loggedIn} />} />
+        <Route path="/" element={loggedIn ? <Home /> : <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/tweet/:id" element={<Tweet />} />

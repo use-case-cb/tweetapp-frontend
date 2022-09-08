@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import Axios from "axios"
 import { Link } from "react-router-dom"
 import TweetHeader from "./TweetHeader"
+import { backend } from "../Constants"
 
 function Tweets() {
   const [tweets, setTweets] = useState([])
@@ -15,7 +16,7 @@ function Tweets() {
 
   async function loadTweets() {
     try {
-      const response = await Axios.get("http://localhost:8080/tweets")
+      const response = await Axios.get(backend + "tweets")
       setTweets(response.data)
     } catch (e) {
       console.log("Error")
@@ -28,7 +29,7 @@ function Tweets() {
     const date = new Date().toLocaleString()
 
     try {
-      await Axios.post("http://localhost:8080/" + localStorage.getItem("appUsername") + "/add", { content, tags, date })
+      await Axios.post(backend + localStorage.getItem("appUsername") + "/add", { content, tags, date })
       e.target.reset()
       loadTweets()
     } catch (e) {

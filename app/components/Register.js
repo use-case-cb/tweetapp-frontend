@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Page from "./Page"
 import Axios from "axios"
+import { backend } from "../Constants"
 
 function Register(props) {
   const nav = useNavigate()
@@ -9,7 +10,7 @@ function Register(props) {
   async function postRegister(e) {
     e.preventDefault()
     try {
-      await Axios.post("http://localhost:8080/register", {
+      await Axios.post(backend + "register", {
         username: formValues.username,
         firstName: formValues.firstName,
         lastName: formValues.lastName,

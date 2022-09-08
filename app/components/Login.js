@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Axios from "axios"
+import { backend } from "../Constants"
 
 import Page from "./Page"
 
@@ -13,7 +14,7 @@ function Login(props) {
     e.preventDefault()
 
     try {
-      const response = await Axios.post("http://localhost:8080/login", { username, password })
+      const response = await Axios.post(backend + "login", { username, password })
       if (response.data) {
         console.log(response.data)
         localStorage.setItem("appUsername", response.data.username)

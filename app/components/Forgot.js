@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Axios from "axios"
 import Page from "./Page"
-import backend from "../Constants"
+import { backend } from "../Constants"
 
 function Forgot() {
   const [username, setUsername] = useState()
@@ -10,7 +10,6 @@ function Forgot() {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      //const response = await Axios.get("http://localhost:8080/" + username + "/forgot")
       const response = await Axios.get(backend + username + "/forgot")
       setPassword(response.data)
     } catch (e) {
@@ -30,7 +29,7 @@ function Forgot() {
         </div>
       </form>
 
-      <h6>{"Password is: " + password}</h6>
+      <h6>{"Password is:: " + password}</h6>
     </Page>
   )
 }

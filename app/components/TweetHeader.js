@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Axios from "axios"
 import { Link } from "react-router-dom"
+import { backend } from "../Constants"
 
 function TweetHeader(props) {
   const [likes, setLikes] = useState()
@@ -20,7 +21,7 @@ function TweetHeader(props) {
 
   async function updateLikes() {
     try {
-      await Axios.put("http://localhost:8080/" + localStorage.getItem("appUsername") + "/like/" + props.tweet.id)
+      await Axios.put(backend + localStorage.getItem("appUsername") + "/like/" + props.tweet.id)
       setLikes(likes + 1)
     } catch (e) {
       console.log("Error")

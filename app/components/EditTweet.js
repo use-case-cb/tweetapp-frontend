@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import Axios from "axios"
 import { useNavigate, Link } from "react-router-dom"
 import Page from "./Page"
+import { backend } from "../Constants"
 
 function EditTweet(props) {
   const [tweet, setTweet] = useState([])
@@ -15,7 +16,7 @@ function EditTweet(props) {
 
   async function loadTweets() {
     try {
-      const response = await Axios.get("http://localhost:8080/tweet/" + tweetId)
+      const response = await Axios.get(backend + "tweet/" + tweetId)
       setTweet(response.data[0])
     } catch (e) {
       console.log("Error")
@@ -35,7 +36,7 @@ function EditTweet(props) {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      await Axios.put("http://localhost:8080/" + localStorage.getItem("appUsername") + "/update/" + tweetId, {
+      await Axios.put(backend + localStorage.getItem("appUsername") + "/update/" + tweetId, {
         content
       })
       loadTweets()

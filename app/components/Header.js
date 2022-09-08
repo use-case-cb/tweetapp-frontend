@@ -10,7 +10,7 @@ function Header(props) {
         <div className="container d-flex flex-column flex-md-row align-items-left p-3">
           <h3 className="my-0 mr-md-auto font-weight-normal">
             <Link to="/" className="text-white">
-              Tweet App
+              Tweet App v3
             </Link>
           </h3>
           {props.loggedIn ? <HeaderLoggedIn setLoggedIn={props.setLoggedIn} /> : <HeaderLoggedOut />}
